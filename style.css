@@ -18,3 +18,10 @@ body {
 .dropdown-toggle::after{
     display:none;
 }
+
+li{
+    list-style-type:none;
+}
+.alert {
+    
+} 

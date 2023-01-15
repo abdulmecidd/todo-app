@@ -3,9 +3,9 @@ let inputTodo = document.getElementById('task');
 let removeAllButton = document.getElementById('removeAllButton');
 
 let todoList = [
-]
-let alertBox = document.getElementById("alert");
+];
 
+let alertBox = document.getElementById("alert");
 
 document.querySelector("#addTodo").addEventListener('click', newTask);
 
@@ -60,6 +60,18 @@ displayTasks();
 
 };
 
-function updateTask() {
+function deleteTask() {
+
+let deletedId;
+
+for(let index in todoList) {
+   if (todoList[index].id == todoList.id) {
+      index = deletedId;
+   }
+}
+
+todoList.splice(deletedId, 1);
+displayTasks();
+   
 
 }

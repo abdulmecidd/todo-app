@@ -1,16 +1,15 @@
 let addTodoButton = document.getElementById('addTodo');
 let inputTodo = document.getElementById('task');
-let removeButton = document.getElementById('removeButton');
+let removeAllButton = document.getElementById('removeAllButton');
 
 let todoList = [
- {"id":1, "todoName": "Writing"},
- {"id":2, "todoName": "Talking"},
- {"id":3, "todoName": "Walking"}
 ]
 let alertBox = document.getElementById("alert");
-displayTasks();
+
 
 document.querySelector("#addTodo").addEventListener('click', newTask);
+
+document.querySelector('#removeAllButton').addEventListener('click', removeAllTasks);
 
 function newTask(){
    let taskInput = document.querySelector("#addTodoInput");
@@ -43,4 +42,9 @@ function displayTasks() {
 };
 
 
- 
+function removeAllTasks() {
+
+todoList.splice(0, todoList.length);
+displayTasks();
+
+};

@@ -1,9 +1,14 @@
 let addTodoButton = document.getElementById('addTodo');
 let inputTodo = document.getElementById('task');
 let removeAllButton = document.getElementById('removeAllButton');
+let taskInput = document.querySelector("#addTodoInput");
 
 let todoList = [
 ];
+
+editMode= false;
+
+let editId;
 
 let alertBox = document.getElementById("alert");
 
@@ -11,23 +16,9 @@ document.querySelector("#addTodo").addEventListener('click', newTask);
 
 document.querySelector('#removeAllButton').addEventListener('click', removeAllTasks);
 
-function newTask(){
-   let taskInput = document.querySelector("#addTodoInput");
-   if(taskInput.value == ""){
-      
-      alertBox.style.display = "block";
-   }else{
-      todoList.push({"id": todoList.length + 1, "todoName": taskInput.value});
-      taskInput.value = "";
-      displayTasks();
-      alertBox.style.display = "none";
-   }
-};
-
 function displayTasks() {
    let ul = document.getElementById('taskList');
    ul.innerHTML = "";
-
    for(let todo of todoList) {
          let li = `
          <li class="task list-group-item" id="task">
@@ -42,7 +33,7 @@ function displayTasks() {
                </button>
                <ul class="dropdown-menu">
                      <li><a onclick="deleteTask(${todo.id})" class="dropdown-item" href="#"><i class="fa-solid fa-trash"></i> Delete</a></li>
-                     <li><a onclick='editTask(${todo.id}, "${todo.gorevAdi}")' class="dropdown-item" href="#"><i class="fa-solid fa-pen"></i> Edit</a></li>
+                     <li><a onclick='editTask(${todo.id}, "${todo.todoName}")' class="dropdown-item" href="#"><i class="fa-solid fa-pen"></i> Edit</a></li>
                </ul>               
                </div>
           </li>
@@ -52,6 +43,28 @@ function displayTasks() {
       }
 };
 
+
+function newTask(){
+  if(!editMode){
+   if(taskInput.value == ""){
+      alertBox.style.display = "block";
+   }else{
+      todoList.push({"id": todoList.length + 1, "todoName": taskInput.value});
+      alertBox.style.display = "none";
+   }
+  }else{
+   for(let task of todoList){
+
+      if(task.id == editId){
+         task.todoName = taskInput.value;
+      }
+      editMode = false;
+
+      }
+      }
+   taskInput.value = "";
+   displayTasks();
+};
 
 function removeAllTasks() {
 
@@ -72,6 +85,12 @@ for(let index in todoList) {
 
 todoList.splice(deletedId, 1);
 displayTasks();
-   
+};
 
+function editTask(taskId, taskName) {
+   editId = taskId;
+   editMode = true;
+   taskInput.value = taskName;
 }
+
+

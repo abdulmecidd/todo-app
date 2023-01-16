@@ -31,3 +31,6 @@ li{
     align-items: center;
     justify-content: space-between;
 } 
+.filters {
+    font-size: 16px;
+}
